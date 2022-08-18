@@ -201,11 +201,12 @@ def entry():
     """  Read from DB in an infinite loop and run prediction every second
       TODO: do training as needed in the future
     """
-    schedule.every(1).seconds.do(RL)
+    job = schedule.every(1).seconds.do(RL)
     print('/////////pass 1 entry schedule.every(1).seconds.do(run_prediction, self)/////')
-    while True:
+    RL()
+    #while True:
         #print('////while True in entry/////') 
-        schedule.run_pending()
+        #schedule.run_pending()
 
         
         
@@ -339,7 +340,7 @@ def RL():
             
             print('if done break out of loop')
             #schedule.cancel_job('RL')
-            schedule.clear()
+            #schedule.clear()
             
             iteration +=1
             # load all tracked results as pandas data frames
@@ -576,7 +577,7 @@ def time(df):
     print('///////////////enter def time//////////////')
     df.index = pd.date_range(start=datetime.datetime.now(), freq='10ms', periods=len(df))
     #df.index = pd.to_numeric(pd.date_range(start=datetime.datetime.now(), freq='10ms', periods=len(df)))
-    print('df.index=',df.index)
+    #print('df.index=',df.index)
     print(df)
     #print('df[0]=', df[0])
     #print('df[35]=', df[35])
@@ -585,10 +586,10 @@ def time(df):
     #print('lambda x: str(x)=', lambda x: str(x))
     #df['state'] = df['state'].apply(lambda x: str(x))
     df[0] = df[0].apply(lambda x: str(x))
-    print('df=', df)
-    print('df[0]=', df[0])
-    print('df[35]=', df[35])
-    print('df[36]=', df[36])
+    #print('df=', df)
+    #print('df[0]=', df[0])
+    #print('df[35]=', df[35])
+    #print('df[36]=', df[36])
     return df
 
 def populatedb_T0():
@@ -624,36 +625,36 @@ def populatedb(action):
     env.reset()
     #action = env.action_space.sample()
     obs, reward, done, info =env.step(action)
-    print('obs=', obs)
-    print('reward=', reward)
-    print('done=', done)
-    print('info=', info)
+    #print('obs=', obs)
+    #print('reward=', reward)
+    #print('done=', done)
+    #print('info=', info)
     
     obs = obs.tolist()
-    print('obs = obs.tolist()=', obs)
+    #print('obs = obs.tolist()=', obs)
     data = obs
-    print('data=obs=', data)
+    #print('data=obs=', data)
     data.append(reward)
-    print('data.append(reward)=', data)
+    #print('data.append(reward)=', data)
     data.append(done)
-    print('data.append(done)=', data)
+    #print('data.append(done)=', data)
 
     data = pd.DataFrame(data)
-    print('data = pd.DataFrame(data)=',data)
+    #print('data = pd.DataFrame(data)=',data)
 
     data = data.T
-    print('data = data.T=', data)
+    #print('data = data.T=', data)
     
     data = time(data)
-    print('data= time(data)=',data)
+    #print('data= time(data)=',data)
     
     # inintiate connection and create database UEDATA
     db = INSERTDATA()
-    print('insert data finished, go to write_point')
+    #print('insert data finished, go to write_point')
     db
-    print('db =', db)
+    #print('db =', db)
     db.client.write_points(data, 'RANMeas')
-    print('db.client.write_points(data, RANMeas)=', db.client.write_points(data, 'RANMeas'))
+    #print('db.client.write_points(data, RANMeas)=', db.client.write_points(data, 'RANMeas'))
   
     del data
     
