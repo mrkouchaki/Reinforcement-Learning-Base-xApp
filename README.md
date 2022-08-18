@@ -1,1 +1,2 @@
-# mr10
+# mr-xapp
+ric-xapp for test
