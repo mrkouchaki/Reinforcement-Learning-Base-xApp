@@ -1,12 +1,12 @@
 {
-        "xapp_name": "mr7",
+        "xapp_name": "mr10",
         "version": "0.0.1",
         "containers": [
             {
-                "name": "mr7",
+                "name": "mr10",
                 "image": {
                     "registry": "xApp-registry.local:5008",
-                    "name": "mr7",
+                    "name": "mr10",
                     "tag": "0.0.1"
                 }
             }
