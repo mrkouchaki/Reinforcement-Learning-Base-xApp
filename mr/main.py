@@ -92,10 +92,6 @@ gamma = 0.99  # Discount factor for past rewards
 max_steps_per_episode = 50
 eps = np.finfo(np.float32).eps.item()  # Smallest number such that 1.0 + eps != 1.0
 
-
-# In[ ]:
-
-
 # num_inputs = 4
 # num_actions = 2
 num_hidden1 = 64
@@ -110,10 +106,6 @@ critic = layers.Dense(1, activation="linear")(common2)
 model = keras.Model(inputs=inputs, outputs=[action, critic])
 
 print('model.summary in get_actor',model.summary())
-
-
-# In[ ]:
-
 
 
 xapp = None
@@ -154,48 +146,6 @@ def default_handler(self, summary, sbuf):
     self.rmr_free(sbuf)
 
 
-def mr_req_handler(self, summary, sbuf):
-    print('///////////enter def mr_req handler/////////////')
-    """
-    This is the main handler for this xapp, which handles load prediction requests.
-    This app fetches a set of data from SDL, and calls the predict method to perform
-    prediction based on the data
-
-    The incoming message that this function handles looks like:
-        {"UEPredictionSet" : ["UEId1","UEId2","UEId3"]}
-    """
-    #self.traffic_steering_requests += 1
-    # we don't use rts here; free the buffer
-    self.rmr_free(sbuf)
-
-    ue_list = []
-    try:
-        print('////enter first try in mr_req_handler////')
-        print('rmr.RMR_MS_PAYLOAD=', rmr.RMR_MS_PAYLOAD)
-        print('summary[rmr.RMR_MS_PAYLOAD]=', summary[rmr.RMR_MS_PAYLOAD])
-        req = json.loads(summary[rmr.RMR_MS_PAYLOAD])  # input should be a json encoded as bytes
-        print('req = json.loads(summary[rmr.RMR_MS_PAYLOAD])=', req)
-        ue_list = req["UEPredictionSet"]
-        print('ue_list=req["UEPredictionSet"] =', ue_list)
-        self.logger.debug("mr_req_handler processing request for UE list {}".format(ue_list))
-    except (json.decoder.JSONDecodeError, KeyError):
-        print('////enter first except in mr_req_handler////')
-        self.logger.warning("mr_req_handler failed to parse request: {}".format(summary[rmr.RMR_MS_PAYLOAD]))
-        return
-    print('ue_list mr_req_handler aftr 1st try=', ue_list)
-    # iterate over the UEs, fetches data for each UE and perform prediction
-    for ueid in ue_list:
-        try:
-            print('////enter second try in mr_req_handler////')
-            uedata = sdl.get_uedata(self, ueid)
-            print('uedata = sdl.get_uedata(self, ueid)=', uedata)
-            predict(self, uedata)
-            print('predict(self, uedata)=', predict(self, uedata))
-        except UENotFound:
-            print('////enter second except in mr_req_handler////')
-            print('enter UENotFound in mr_req_handler')
-            self.logger.warning("mr_req_handler received a TS Request for a UE that does not exist!")
-
 def entry():
     print('////////////enter def entry///////////////')
     """  Read from DB in an infinite loop and run prediction every second
@@ -206,9 +156,7 @@ def entry():
     RL()
     #while True:
         #print('////while True in entry/////') 
-        #schedule.run_pending()
-
-        
+        #schedule.run_pending()        
         
 def RL():
     optimizer = keras.optimizers.Adam(learning_rate=0.01)
@@ -449,38 +397,40 @@ def RL():
 
         if episode_count > 1:  # Condition to consider the task solved
             print("Solved at episode {}!".format(episode_count))
+            print("Solved at episode {}!".format(episode_count))
+            print("Solved at episode {}!".format(episode_count))
 
             scalar_results_2 = env.monitor.load_results()
 
-            plt.plot(reward_history_for_plot)
-            plt.xlabel("episode_count")
-            plt.ylabel("reward_history_for_plot")
-            plt.show()    
+#             plt.plot(reward_history_for_plot)
+#             plt.xlabel("episode_count")
+#             plt.ylabel("reward_history_for_plot")
+#             plt.show()    
 
-            plt.plot(running_rewards_history)
-            plt.xlabel("episode_count")
-            plt.ylabel("running_rewards_history")
-            plt.show()
+#             plt.plot(running_rewards_history)
+#             plt.xlabel("episode_count")
+#             plt.ylabel("running_rewards_history")
+#             plt.show()
 
-            plt.plot(episode_reward_history)
-            plt.xlabel("episode_count")
-            plt.ylabel("episode_reward")
-            plt.show()
+#             plt.plot(episode_reward_history)
+#             plt.xlabel("episode_count")
+#             plt.ylabel("episode_reward")
+#             plt.show()
 
-            plt.plot(loss_value_history)
-            plt.xlabel("iteration")
-            plt.ylabel("loss_value_history")
-            plt.show()
+#             plt.plot(loss_value_history)
+#             plt.xlabel("iteration")
+#             plt.ylabel("loss_value_history")
+#             plt.show()
 
-            plt.plot(utility_history)
-            plt.xlabel("episode_count")
-            plt.ylabel("utility_history")
-            plt.show()
+#             plt.plot(utility_history)
+#             plt.xlabel("episode_count")
+#             plt.ylabel("utility_history")
+#             plt.show()
 
-            plt.plot(episode_utility_history)
-            plt.xlabel("episode_count")
-            plt.ylabel("episode_utility_history")
-            plt.show()
+#             plt.plot(episode_utility_history)
+#             plt.xlabel("episode_count")
+#             plt.ylabel("episode_utility_history")
+#             plt.show()
 
 
             break
@@ -658,6 +608,49 @@ def populatedb(action):
   
     del data
     
+
+
+def mr_req_handler(self, summary, sbuf):
+    print('///////////enter def mr_req handler/////////////')
+    """
+    This is the main handler for this xapp, which handles load prediction requests.
+    This app fetches a set of data from SDL, and calls the predict method to perform
+    prediction based on the data
+
+    The incoming message that this function handles looks like:
+        {"UEPredictionSet" : ["UEId1","UEId2","UEId3"]}
+    """
+    #self.traffic_steering_requests += 1
+    # we don't use rts here; free the buffer
+    self.rmr_free(sbuf)
+
+    ue_list = []
+    try:
+        print('////enter first try in mr_req_handler////')
+        print('rmr.RMR_MS_PAYLOAD=', rmr.RMR_MS_PAYLOAD)
+        print('summary[rmr.RMR_MS_PAYLOAD]=', summary[rmr.RMR_MS_PAYLOAD])
+        req = json.loads(summary[rmr.RMR_MS_PAYLOAD])  # input should be a json encoded as bytes
+        print('req = json.loads(summary[rmr.RMR_MS_PAYLOAD])=', req)
+        ue_list = req["UEPredictionSet"]
+        print('ue_list=req["UEPredictionSet"] =', ue_list)
+        self.logger.debug("mr_req_handler processing request for UE list {}".format(ue_list))
+    except (json.decoder.JSONDecodeError, KeyError):
+        print('////enter first except in mr_req_handler////')
+        self.logger.warning("mr_req_handler failed to parse request: {}".format(summary[rmr.RMR_MS_PAYLOAD]))
+        return
+    print('ue_list mr_req_handler aftr 1st try=', ue_list)
+    # iterate over the UEs, fetches data for each UE and perform prediction
+    for ueid in ue_list:
+        try:
+            print('////enter second try in mr_req_handler////')
+            uedata = sdl.get_uedata(self, ueid)
+            print('uedata = sdl.get_uedata(self, ueid)=', uedata)
+            predict(self, uedata)
+            print('predict(self, uedata)=', predict(self, uedata))
+        except UENotFound:
+            print('////enter second except in mr_req_handler////')
+            print('enter UENotFound in mr_req_handler')
+            self.logger.warning("mr_req_handler received a TS Request for a UE that does not exist!")    
     
  
 
