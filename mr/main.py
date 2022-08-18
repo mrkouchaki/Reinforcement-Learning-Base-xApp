@@ -89,7 +89,7 @@ print("Max Value of Action ->  {}".format(upper_bound))
 print("Min Value of Action ->  {}".format(lower_bound))
 # Configuration parameters for the whole setup
 gamma = 0.99  # Discount factor for past rewards
-max_steps_per_episode = 200
+max_steps_per_episode = 50
 eps = np.finfo(np.float32).eps.item()  # Smallest number such that 1.0 + eps != 1.0
 
 
