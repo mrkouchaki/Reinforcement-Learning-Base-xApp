@@ -225,7 +225,7 @@ def RL():
 
 
                 # Sample action from action probability distribution
-                #print('paaaaaaaaaaasssseeeddddddddddd shittttttttttttttt')
+                #print('paaaaaaaaaaasssseeeddddddddddd')
                 actions = [0]*num_ues
                 action_probs_per_action = []
                 p_whole = []
