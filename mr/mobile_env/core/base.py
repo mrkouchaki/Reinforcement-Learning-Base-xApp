@@ -376,7 +376,7 @@ class MComCore(gym.Env):
         
     def done(self):
         """Episode is done after max. time steps or once last UE departed."""
-        if self.handler.reward(self) > -0.4:
+        if self.handler.reward(self) > -0.2:
                         
             return True
         else:
