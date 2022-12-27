@@ -169,7 +169,7 @@ def RL():
 
             for timestep in range(1, max_steps_per_episode):
                 print('timestep=', timestep)
-                # env.render(); Adding this line would show the attempts
+                env.render(); #Adding this line would show the attempts
                 # of the agent in a pop up window.
                 prev_state = state
                 #print('prev_state in main=', prev_state)
