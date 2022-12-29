@@ -4,6 +4,7 @@ import os
 import sys
 #sys.path.append('C:/Users/Mohammadreza/Desktop/My Class/Proj-DC/My Works/Scheduling/xApp/mr7-main/mr9_github')
 sys.path.append('.')
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 import schedule
 import datetime
 from zipfile import ZipFile
