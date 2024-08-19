@@ -1,10 +1,15 @@
-# RL-based Resource Management xApp for O-RAN
+# Reinforcement Learning-based Resource Management xApp for O-RAN
 
 Welcome to the repository for my xApp developed for resource management in communication networks using a reinforcement learning (RL) model. This xApp is part of the research published in the paper titled ["Actor-Critic Network for O-RAN Resource Allocation: xApp Design, Deployment, and Analysis"](https://ieeexplore.ieee.org/abstract/document/10008713).
 
 ## 📜 Overview
 
 This xApp implements a resource management solution for O-RAN using an Actor-Critic RL model. The model is designed to optimize the allocation of resources in a communication network by learning from the environment and making decisions that maximize efficiency and performance. 
+
+## What is an xApp?
+
+An xApp is a containerized microservice designed to perform specific network functions, such as resource management or optimization, within a distributed network environment. xApps are typically deployed on Kubernetes clusters, running as pods within the nodes of the cluster. Each xApp operates independently, interacting with other network elements through well-defined APIs. The containerized nature of xApps allows for scalability, flexibility, and ease of deployment, enabling them to be seamlessly integrated into existing network infrastructures. These applications are highly modular and can be updated or scaled without impacting the rest of the system, making them ideal for dynamic network environments where real-time adjustments are critical for maintaining performance and efficiency.
+
 
 ### Key Features:
 - **Reinforcement Learning Model:** Utilizes the Actor-Critic architecture to learn and optimize resource allocation strategies in real-time.
