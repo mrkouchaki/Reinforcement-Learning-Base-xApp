@@ -1,4 +1,4 @@
-# Reinforcement Learning-based Resource Management xApp for O-RAN
+# Reinforcement Learning-based Resource Management xApp (Simplified Version)
 
 Welcome to the repository for my xApp developed for resource management in communication networks using a Reinforcement Learning (RL) model. This xApp is part of the research published in the paper titled ["Actor-Critic Network for O-RAN Resource Allocation: xApp Design, Deployment, and Analysis"](https://ieeexplore.ieee.org/abstract/document/10008713).
 
