@@ -12,7 +12,7 @@ An xApp is a containerized microservice designed to perform specific network fun
 
 
 ### Key Features:
-- **Reinforcement Learning Model:** Utilizes the Actor-Critic architecture to learn and optimize resource allocation strategies in real-time.
+- **Reinforcement Learning Model:** Utilizes the A2C (Advantage Actor-Critic) architecture to learn and optimize resource allocation strategies in real-time.
 - **O-RAN Integration:** Designed specifically for O-RAN networks, allowing seamless integration and deployment.
 - **Scalability:** Capable of handling high-dimensional state spaces and large action spaces, making it suitable for complex network environments.
 - **Real-Time Decision Making:** The xApp makes resource allocation decisions every second, ensuring timely and efficient management of network resources.
