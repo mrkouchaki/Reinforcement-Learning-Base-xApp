@@ -110,7 +110,4 @@ This work is based on the research paper: ["Actor-Critic Network for O-RAN Resou
 
 ## 📫 Contact
 
-If you have any questions or suggestions, feel free to reach out to me:
-
-- **Email:** [mrkouchakii@gmail.com](mailto:mrkouchakii@gmail.com)
-- **LinkedIn:** [linkedin.com/in/mohammadreza-kouchaki](https://www.linkedin.com/in/mohammadreza-kouchaki/)
+If you have any questions or suggestions, feel free to reach out to me via Email or LinkedIn. 
